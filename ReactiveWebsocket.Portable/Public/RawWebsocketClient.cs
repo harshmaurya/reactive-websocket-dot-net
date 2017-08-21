@@ -1,0 +1,132 @@
+﻿using System;
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
+using System.Threading;
+using System.Threading.Tasks;
+using ReactiveWebsocket.Abstractions;
+using ReactiveWebsocket.Model;
+using ReactiveWebsocket.PlatformAbstraction;
+
+namespace ReactiveWebsocket.Public
+{
+    public class RawWebsocketClient : IRawWebsocketCommunicator
+    {
+        private readonly WebSocketOptions _options;
+        private readonly IPlatformWebsocket _webSocket;
+        private Subject<byte[]> _dataStream;
+        private BehaviorSubject<Status> _statusStream;
+
+        public RawWebsocketClient(IPlatformWebsocket webSocket, WebSocketOptions options)
+        {
+            _webSocket = webSocket;
+            _options = options;
+            Initialize();
+        }
+
+        public IObservable<Status> StatusStream => _statusStream;
+        
+        public async Task<bool> ConnectAsync(Uri uri, CancellationToken cancellationToken)
+        {
+            PublishStatus(ConnectionState.Connecting, $"Connecting to {uri}");
+
+            try
+            {
+                await _webSocket.ConnectAsync(uri, cancellationToken);
+                StartListening();
+                PublishStatus(ConnectionState.Connected, $"Connected to {uri}");
+                return true;
+            }
+            catch (Exception exception)
+            {
+                PublishStatus(ConnectionState.Disconnected, exception);
+                return false;
+            }
+        }
+
+        public async Task<bool> Reconnect(Uri uri, CancellationToken cancellationToken)
+        {
+            Dispose();
+            PublishStatus(ConnectionState.Connecting, $"Reconnecting to {uri}");
+            Initialize();
+            var result = await ConnectAsync(uri, cancellationToken);
+            return result;
+        }
+
+
+        public Task CloseAsync()
+        {
+            return _webSocket.CloseAsync();
+        }
+
+        public IObservable<byte[]> GetResponseStream()
+        {
+            return _dataStream.AsObservable();
+        }
+
+        public async Task SendMessageAsync(byte[] message)
+        {
+            await _webSocket.SendAsync(new ArraySegment<byte>(message), _options.MessageType, true,
+                CancellationToken.None);
+        }
+
+        public void Dispose()
+        {
+            _webSocket?.Dispose();
+            _dataStream?.Dispose();
+            _statusStream.Dispose();
+        }
+
+        private void Initialize()
+        {
+            //_webSocket = new ClientWebSocket();
+            _dataStream = new Subject<byte[]>();
+            _statusStream = new BehaviorSubject<Status>(new Status { ConnectionState = ConnectionState.Disconnected });
+        }
+
+
+        private void PublishStatus(ConnectionState state, string message)
+        {
+            PublishStatus(state, message, null);
+        }
+
+        private void PublishStatus(ConnectionState state, Exception exception)
+        {
+            PublishStatus(state, "", exception);
+        }
+
+        private void PublishStatus(ConnectionState state, string message, Exception exception)
+        {
+            _statusStream.OnNext(new Status
+            {
+                ConnectionState = state,
+                Message = message,
+                Error = exception
+            });
+        }
+
+        //async void is bad but there is no other option in this scenario. 
+        //It is equivalent to event handler, caller is not interested in task
+        private async void StartListening()
+        {
+            var receiveBuffer = new byte[4096 * 20];
+            while (_webSocket.State == WebSocketState.Open)
+            {
+                var totalBytes = new byte[0];
+                WebSocketReceiveResult result;
+                do
+                {
+                    result = await _webSocket.ReceiveAsync(new ArraySegment<byte>(receiveBuffer), CancellationToken.None);
+
+                    var existingSize = totalBytes.Length;
+                    totalBytes = new byte[existingSize + result.Count];
+                    Buffer.BlockCopy(receiveBuffer, 0, totalBytes, existingSize, result.Count);
+
+                } while (!result.EndOfMessage);
+
+                _dataStream.OnNext(totalBytes);
+            }
+        }
+
+
+    }
+}
