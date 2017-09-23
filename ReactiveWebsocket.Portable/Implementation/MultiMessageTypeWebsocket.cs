@@ -61,7 +61,7 @@ namespace ReactiveWebsocket.Implementation
                     .ContinueWith(task =>
                     {
                         if (task.IsFaulted)
-                            throw new Exception(task.Exception.Message);
+                            throw new Exception(task.Exception.Message); 
                     });
                 return _communicator.GetResponseStream().VerifyConnected(CurrentStatus)
                 .Select(bytes => TryDeSerialize<TResponseType>(bytes))

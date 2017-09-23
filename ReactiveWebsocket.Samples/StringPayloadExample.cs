@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using ReactiveWebsocket.Model;
 using ReactiveWebsocket.Public;
 using ConnectionState = ReactiveWebsocket.Model.ConnectionState;
 
@@ -8,9 +9,12 @@ namespace ReactiveWebsocket.Samples
     internal class StringPayloadExample
     {
         private const string Uri = "ws://reactivewebsocket.azurewebsites.net/ReactiveWebSocketServer/stringdemo";
-
+        
         public async void RunAsync()
         {
+            //set platform assembly (Optional)
+            WebsocketInitializer.SetPlatform(PlatformName.Desktop);
+
             // Use the StringWebsocketClient for simple string payloads
             var socket = new StringWebsocketClient();
 

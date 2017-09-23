@@ -41,16 +41,20 @@
     <Compile Include="Abstractions\IRawWebsocketCommunicator.cs" />
     <Compile Include="Abstractions\ISingleMessageTypeDeserializer.cs" />
     <Compile Include="Abstractions\ISingleMessageTypeSerializer.cs" />
+    <Compile Include="Implementation\JsonDeserializer.cs" />
+    <Compile Include="Implementation\JsonSerializer.cs" />
     <Compile Include="Implementation\SingleMessageTypeWebsocket.cs" />
     <Compile Include="Model\ConnectionState.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Abstractions\IMultiMessageTypeDeserializer.cs" />
     <Compile Include="Abstractions\ISingleMessageTypeWebsocket.cs" />
     <Compile Include="Abstractions\IMultiMessageTypeSerializer.cs" />
+    <Compile Include="Model\Enum.cs" />
     <Compile Include="Model\MessageType.cs" />
     <Compile Include="PlatformAbstraction\IPlatformWebsocket.cs" />
     <Compile Include="PlatformAbstraction\PlatformHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Public\JsonWebsocketClient.cs" />
     <Compile Include="Public\RawWebsocketClient.cs" />
     <Compile Include="Implementation\MultiMessageTypeWebsocket.cs" />
     <Compile Include="Model\Status.cs" />
@@ -60,6 +64,7 @@
     <Compile Include="Model\WebSocketOptions.cs" />
     <Compile Include="Model\WebSocketReceiveResult.cs" />
     <Compile Include="Model\WebSocketState.cs" />
+    <Compile Include="Public\WebsocketInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />

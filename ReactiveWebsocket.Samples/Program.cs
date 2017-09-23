@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using ReactiveWebsocket.Implementation;
 
 namespace ReactiveWebsocket.Samples
 {
@@ -6,7 +8,6 @@ namespace ReactiveWebsocket.Samples
     {
         static void Main(string[] args)
         {
-
             var stringExample = new StringPayloadExample();
             stringExample.RunAsync();
             Console.Read();

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>ReactiveWebsocket.Portable</id>
-    <version>1.0.0-preview00002</version>
+    <version>1.0.0-preview00003</version>
     <title>Reactive Websocket</title>
     <authors>Harsh Maurya</authors>
     <owners>harshmaurya</owners>
@@ -10,7 +10,7 @@
     <projectUrl>http://harshmaurya.in</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A portable library providing web socket implementation with inbuilt Rx support</description>
-    <releaseNotes>First cut.</releaseNotes>
+    <releaseNotes>Fixed a bug.</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags>websocket portable reactive rx</tags>
     <dependencies>

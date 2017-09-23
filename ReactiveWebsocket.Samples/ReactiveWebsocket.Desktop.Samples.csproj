@@ -33,11 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ReactiveWebsocket.Desktop, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ReactiveWebsocket.Desktop.1.0.0-preview00002\lib\net462\ReactiveWebsocket.Desktop.dll</HintPath>
-    </Reference>
-    <Reference Include="ReactiveWebsocket.Portable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ReactiveWebsocket.Portable.1.0.0-preview00002\lib\netstandard1.3\ReactiveWebsocket.Portable.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -58,9 +55,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ReactiveWebsocket.Desktop\ReactiveWebsocket.Desktop.csproj">
+      <Project>{d578e7ea-bf24-4d1a-b0ac-1e3cc6fa4b57}</Project>
+      <Name>ReactiveWebsocket.Desktop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReactiveWebsocket.Portable\ReactiveWebsocket.Portable.csproj">
+      <Project>{a1d19c12-50f3-495e-a372-768b510dc26d}</Project>
+      <Name>ReactiveWebsocket.Portable</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
