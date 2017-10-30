@@ -1,0 +1,9 @@
+W:\Personal Projects\Reactive Websockets\ReactiveWebsocket.Ios\bin\Debug\ReactiveWebsocket.Ios.dll
+W:\Personal Projects\Reactive Websockets\ReactiveWebsocket.Ios\bin\Debug\ReactiveWebsocket.Ios.pdb
+W:\Personal Projects\Reactive Websockets\ReactiveWebsocket.Ios\bin\Debug\ReactiveWebsocket.Portable.dll
+W:\Personal Projects\Reactive Websockets\ReactiveWebsocket.Ios\bin\Debug\ReactiveWebsocket.Portable.pdb
+W:\Personal Projects\Reactive Websockets\ReactiveWebsocket.Ios\obj\Debug\optimized\
+W:\Personal Projects\Reactive Websockets\ReactiveWebsocket.Ios\obj\Debug\ReactiveWebsocket.Ios.csprojResolveAssemblyReference.cache
+W:\Personal Projects\Reactive Websockets\ReactiveWebsocket.Ios\obj\Debug\ReactiveWebsocket.Ios.csproj.CoreCompileInputs.cache
+W:\Personal Projects\Reactive Websockets\ReactiveWebsocket.Ios\obj\Debug\ReactiveWebsocket.Ios.dll
+W:\Personal Projects\Reactive Websockets\ReactiveWebsocket.Ios\obj\Debug\ReactiveWebsocket.Ios.pdb

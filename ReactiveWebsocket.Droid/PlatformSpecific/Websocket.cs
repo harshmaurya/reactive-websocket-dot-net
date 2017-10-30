@@ -7,7 +7,7 @@ using ReactiveWebsocket.PlatformAbstraction;
 using WebSocketReceiveResult = ReactiveWebsocket.Model.WebSocketReceiveResult;
 using WebSocketState = ReactiveWebsocket.Model.WebSocketState;
 
-namespace ReactiveWebsocket.Droid.PlatformSpecific
+namespace ReactiveWebsocket.Android.PlatformSpecific
 {
     internal class Websocket : IPlatformWebsocket
     {

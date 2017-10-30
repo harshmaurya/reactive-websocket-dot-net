@@ -2,7 +2,6 @@
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
-using System.Threading;
 using System.Threading.Tasks;
 using ReactiveWebsocket.Abstractions;
 using ReactiveWebsocket.Helpers;
@@ -79,15 +78,11 @@ namespace ReactiveWebsocket.Implementation
 
         public IObservable<Status> StatusStream => _communicator.StatusStream;
 
-        public Task<bool> ConnectAsync(Uri uri, CancellationToken cancellationToken)
+        public Task<bool> ConnectAsync()
         {
-            return _communicator.ConnectAsync(uri, cancellationToken);
+            return _communicator.ConnectAsync();
         }
-
-        public Task<bool> Reconnect(Uri uri, CancellationToken cancellationToken)
-        {
-            return _communicator.Reconnect(uri, cancellationToken);
-        }
+        
 
         public Task CloseAsync()
         {

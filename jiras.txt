@@ -1,4 +1,0 @@
-auto reconnect
-no need of json lib
-IOS client
-separate sample API

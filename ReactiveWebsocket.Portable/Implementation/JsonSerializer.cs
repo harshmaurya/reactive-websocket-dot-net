@@ -1,4 +1,6 @@
-﻿using ReactiveWebsocket.Abstractions;
+﻿using System.Text;
+using Newtonsoft.Json;
+using ReactiveWebsocket.Abstractions;
 
 namespace ReactiveWebsocket.Implementation
 {
@@ -6,8 +8,8 @@ namespace ReactiveWebsocket.Implementation
     {
         public byte[] Serialize<TRequestType>(TRequestType payload)
         {
-            var serializer = new JsonSerializer();
-            return serializer.Serialize(payload);
+            var result = JsonConvert.SerializeObject(payload);
+            return Encoding.UTF8.GetBytes(result);
         }
     }
 }

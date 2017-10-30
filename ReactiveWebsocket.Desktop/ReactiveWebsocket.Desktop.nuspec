@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>ReactiveWebsocket.Desktop</id>
-    <version>1.0.0-preview00002</version>
+    <version>1.0.0-preview00003</version>
     <title>Reactive Websocket</title>
     <authors>Harsh Maurya</authors>
     <owners>harshmaurya</owners>
@@ -10,11 +10,11 @@
     <projectUrl>http://harshmaurya.in</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A .Net library for desktop apps providing web socket implementation with inbuilt Rx support and error handling. Requires minimum .Net framework version 4.6.2</description>
-    <releaseNotes>Fixed the dependencies</releaseNotes>
+    <releaseNotes>Fixed minor bugs</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags>websocket portable reactive rx</tags>
     <dependencies>
-      <dependency id="ReactiveWebsocket.Portable" version="1.0.0-preview00002" />
+      <dependency id="ReactiveWebsocket.Portable" version="1.0.0-preview00004" />
     </dependencies>
   </metadata>
   <files>

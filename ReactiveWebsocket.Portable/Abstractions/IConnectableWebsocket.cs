@@ -1,5 +1,4 @@
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using ReactiveWebsocket.Model;
 
@@ -16,20 +15,11 @@ namespace ReactiveWebsocket.Abstractions
         /// <summary>
         /// Connects to the websocket server
         /// </summary>
-        /// <param name="uri">uri to connect to</param>
-        /// <param name="cancellationToken">cancellation token</param>
+        /// 
         /// <returns></returns>
-        Task<bool> ConnectAsync(Uri uri, CancellationToken cancellationToken);
+        Task<bool> ConnectAsync();
 
-        /// <summary>
-        /// Reconnect to the given websocket server. Previous connection is disposed
-        /// </summary>
-        /// <param name="uri"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<bool> Reconnect(Uri uri, CancellationToken cancellationToken);
-
-
+        
         /// <summary>
         /// Closes the websocket connection
         /// </summary>

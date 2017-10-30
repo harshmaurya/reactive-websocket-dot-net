@@ -51,7 +51,7 @@ public class SampleWebSocket {
 
             @Override
             public void run() {
-            	String message = _text + Integer.toString(_count);
+            	String message = _text + " response " + Integer.toString(_count);
             	_count++;
             	try {
             		synchronized(this){

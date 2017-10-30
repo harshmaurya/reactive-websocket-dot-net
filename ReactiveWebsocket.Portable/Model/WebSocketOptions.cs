@@ -21,7 +21,7 @@ namespace ReactiveWebsocket.Model
         /// <summary>
         /// The type of message your payload supports (binary/text)
         /// </summary>
-        public MessageType MessageType { get; set; }
+        public MessageType MessageType { get; }
 
 
         //public long BufferSize { get; set; }

@@ -1,4 +1,5 @@
-﻿using ReactiveWebsocket.Implementation;
+﻿using System;
+using ReactiveWebsocket.Implementation;
 using ReactiveWebsocket.Model;
 using ReactiveWebsocket.PlatformAbstraction;
 
@@ -6,10 +7,10 @@ namespace ReactiveWebsocket.Public
 {
     public class JsonWebsocketClient : MultiMessageTypeWebsocket
     {
-        public JsonWebsocketClient() :
+        public JsonWebsocketClient(Uri uri) :
             base(new JsonSerializer(), new JsonDeserializer(),
                 new RawWebsocketClient(PlatformHelper.Resolve<IPlatformWebsocket>(),
-                    new WebSocketOptions(MessageType.Text)))
+                    uri, new WebSocketOptions(MessageType.Text)))
         {
         }
     }

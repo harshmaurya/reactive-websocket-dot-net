@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>ReactiveWebsocket.Portable</id>
-    <version>1.0.0-preview00003</version>
+    <version>1.0.0-preview00004</version>
     <title>Reactive Websocket</title>
     <authors>Harsh Maurya</authors>
     <owners>harshmaurya</owners>
@@ -15,6 +15,7 @@
     <tags>websocket portable reactive rx</tags>
     <dependencies>
       <dependency id="System.Reactive" version="4.0.0-preview00001" />
+	  <dependency id="Newtonsoft.Json" version="10.0.3" />
     </dependencies>
   </metadata>
   <files>

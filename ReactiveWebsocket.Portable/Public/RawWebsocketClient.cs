@@ -13,27 +13,29 @@ namespace ReactiveWebsocket.Public
     {
         private readonly WebSocketOptions _options;
         private readonly IPlatformWebsocket _webSocket;
+        private readonly Uri _uri;
         private Subject<byte[]> _dataStream;
         private BehaviorSubject<Status> _statusStream;
 
-        public RawWebsocketClient(IPlatformWebsocket webSocket, WebSocketOptions options)
+        public RawWebsocketClient(IPlatformWebsocket webSocket, Uri uri, WebSocketOptions options)
         {
             _webSocket = webSocket;
+            _uri = uri;
             _options = options;
             Initialize();
         }
 
         public IObservable<Status> StatusStream => _statusStream;
-        
-        public async Task<bool> ConnectAsync(Uri uri, CancellationToken cancellationToken)
+
+        public async Task<bool> ConnectAsync()
         {
-            PublishStatus(ConnectionState.Connecting, $"Connecting to {uri}");
+            PublishStatus(ConnectionState.Connecting, $"Connecting to {_uri}");
 
             try
             {
-                await _webSocket.ConnectAsync(uri, cancellationToken);
+                await _webSocket.ConnectAsync(_uri, CancellationToken.None);
                 StartListening();
-                PublishStatus(ConnectionState.Connected, $"Connected to {uri}");
+                PublishStatus(ConnectionState.Connected, $"Connected to {_uri}");
                 return true;
             }
             catch (Exception exception)
@@ -43,12 +45,12 @@ namespace ReactiveWebsocket.Public
             }
         }
 
-        public async Task<bool> Reconnect(Uri uri, CancellationToken cancellationToken)
+        private async Task<bool> Reconnect()
         {
             Dispose();
-            PublishStatus(ConnectionState.Connecting, $"Reconnecting to {uri}");
+            PublishStatus(ConnectionState.Connecting, $"Reconnecting to {_uri}");
             Initialize();
-            var result = await ConnectAsync(uri, cancellationToken);
+            var result = await ConnectAsync();
             return result;
         }
 
@@ -78,7 +80,6 @@ namespace ReactiveWebsocket.Public
 
         private void Initialize()
         {
-            //_webSocket = new ClientWebSocket();
             _dataStream = new Subject<byte[]>();
             _statusStream = new BehaviorSubject<Status>(new Status { ConnectionState = ConnectionState.Disconnected });
         }

@@ -2,7 +2,7 @@
   "supports": {},
   "dependencies": {
     "Microsoft.NETCore.Portable.Compatibility": "1.0.1",
-    "NETStandard.Library": "1.6.1",
+    "NETStandard.Library": "1.6.0",
     "Newtonsoft.Json": "10.0.3",
     "System.Reactive": "4.0.0-preview00001"
   },

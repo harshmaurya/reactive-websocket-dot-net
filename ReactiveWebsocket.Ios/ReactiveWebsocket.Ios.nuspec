@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>ReactiveWebsocket.Ios</id>
+    <version>1.0.0-preview00001</version>
+    <title>Reactive Websocket For Ios</title>
+    <authors>Harsh Maurya</authors>
+    <owners>harshmaurya</owners>
+    <licenseUrl>https://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>http://harshmaurya.in</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A library for Ios apps providing web socket implementation with inbuilt Rx support and error handling. Minimum Ios version required is 10.0</description>
+    <releaseNotes>First cut</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>websocket portable reactive rx Ios</tags>
+    <dependencies>
+      <dependency id="ReactiveWebsocket.Portable" version="1.0.0-preview00002" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\release\ReactiveWebsocket.Ios.dll" target="lib\monotouch" />
+  </files>
+</package>

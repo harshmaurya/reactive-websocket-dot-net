@@ -8,7 +8,7 @@ namespace ReactiveWebsocket.Public
     {
         public static void SetPlatform(PlatformName platform)
         {
-            string assemblyName = string.Empty;
+            string assemblyName;
             switch (platform)
             {
                 case PlatformName.Desktop:
