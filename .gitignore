@@ -28,3 +28,7 @@ ReactiveWebsocket\.Samples/obj/
 \.vs/
 
 ReactiveWebsocket\.Portable/project\.lock\.json
+
+ReactiveWebsocket\.Ios/bin/
+
+ReactiveWebsocket\.Ios/obj/

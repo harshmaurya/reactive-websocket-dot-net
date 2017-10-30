@@ -7,12 +7,3 @@ W:\Personal Projects\Reactive Websockets\ReactiveWebsocket.Ios\obj\Release\React
 W:\Personal Projects\Reactive Websockets\ReactiveWebsocket.Ios\obj\Release\ReactiveWebsocket.Ios.csproj.CoreCompileInputs.cache
 W:\Personal Projects\Reactive Websockets\ReactiveWebsocket.Ios\obj\Release\ReactiveWebsocket.Ios.dll
 W:\Personal Projects\Reactive Websockets\ReactiveWebsocket.Ios\obj\Release\ReactiveWebsocket.Ios.pdb
-W:\Personal Projects\Reactive Websockets\Api\ReactiveWebsocket.Ios\bin\Release\ReactiveWebsocket.Ios.dll
-W:\Personal Projects\Reactive Websockets\Api\ReactiveWebsocket.Ios\bin\Release\ReactiveWebsocket.Ios.pdb
-W:\Personal Projects\Reactive Websockets\Api\ReactiveWebsocket.Ios\bin\Release\ReactiveWebsocket.Portable.dll
-W:\Personal Projects\Reactive Websockets\Api\ReactiveWebsocket.Ios\bin\Release\ReactiveWebsocket.Portable.pdb
-W:\Personal Projects\Reactive Websockets\Api\ReactiveWebsocket.Ios\obj\Release\optimized\
-W:\Personal Projects\Reactive Websockets\Api\ReactiveWebsocket.Ios\obj\Release\ReactiveWebsocket.Ios.csprojResolveAssemblyReference.cache
-W:\Personal Projects\Reactive Websockets\Api\ReactiveWebsocket.Ios\obj\Release\ReactiveWebsocket.Ios.csproj.CoreCompileInputs.cache
-W:\Personal Projects\Reactive Websockets\Api\ReactiveWebsocket.Ios\obj\Release\ReactiveWebsocket.Ios.dll
-W:\Personal Projects\Reactive Websockets\Api\ReactiveWebsocket.Ios\obj\Release\ReactiveWebsocket.Ios.pdb
