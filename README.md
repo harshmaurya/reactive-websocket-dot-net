@@ -1,4 +1,4 @@
-Welcome to project home for reactive-websocket. This library provides client abstraction with Rx support for a variety of platforms - Desktop, Android, Ios, and Xamarin Forms.
+Welcome to project home for reactive websocket - A portable .Net library providing client side websocket API. 
 
 # Overview
 Web-sockets are the latest addition to the communication protocol which standardizes the way client communicates with the server. It provides full duplex communication channel over a single TCP connection which is great considering the workarounds that existed previously for achieving the same result.For .Net world, Microsoft has provided a client implementation of WebSocket which can connect to any server supporting the same protocol. However, it is at a much lower level leaving the developer to deal with a lot of boilerplate code, not to mention effort which goes into making the code robust.Reactive WebSocket is an open source library which has been developed as a wrapper of the Microsoft’s implementation providing the following functionalities:
