@@ -2,19 +2,19 @@
 <package >
   <metadata>
     <id>ReactiveWebsocket.Ios</id>
-    <version>1.0.0-preview00006</version>
+    <version>1.0.0</version>
     <title>Reactive Websocket For Ios</title>
     <authors>Harsh Maurya</authors>
     <owners>harshmaurya</owners>
     <licenseUrl>https://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
-    <projectUrl>http://harshmaurya.in</projectUrl>
+    <projectUrl>http://harshmaurya.in/reactive-websocket</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A library for Ios apps providing web socket implementation with inbuilt Rx support and error handling. Minimum Ios version required is 10.0</description>
-    <releaseNotes>First cut</releaseNotes>
-    <copyright>Copyright 2017</copyright>
+    <description>A library for Ios apps providing web socket implementation with inbuilt Rx support and error handling. Check https://github.com/harshmaurya/reactive-websocket for details.</description>
+    <releaseNotes>Removed preview limitation</releaseNotes>
+    <copyright>Copyright 2018</copyright>
     <tags>websocket portable reactive rx Ios</tags>
     <dependencies>
-      <dependency id="ReactiveWebsocket.Portable" version="1.0.0-preview00007" />
+      <dependency id="ReactiveWebsocket.Portable" version="1.0.1" />
     </dependencies>
   </metadata>
   <files>

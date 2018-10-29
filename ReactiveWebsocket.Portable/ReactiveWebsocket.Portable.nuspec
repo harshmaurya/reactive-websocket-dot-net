@@ -2,23 +2,23 @@
 <package >
   <metadata>
     <id>ReactiveWebsocket.Portable</id>
-    <version>1.0.0-preview00007</version>
+    <version>1.0.1</version>
     <title>Reactive Websocket</title>
     <authors>Harsh Maurya</authors>
     <owners>harshmaurya</owners>
     <licenseUrl>https://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
-    <projectUrl>http://harshmaurya.in</projectUrl>
+    <projectUrl>http://harshmaurya.in/reactive-websocket</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A portable library providing web socket implementation with inbuilt Rx support</description>
-    <releaseNotes>Fixed a bug.</releaseNotes>
-    <copyright>Copyright 2017</copyright>
+    <description>A portable library providing web socket implementation with inbuilt Rx support. Check https://github.com/harshmaurya/reactive-websocket for details.</description>
+    <releaseNotes>Removed preview limitation</releaseNotes>
+    <copyright>Copyright 2018</copyright>
     <tags>websocket portable reactive rx</tags>
     <dependencies>
-      <dependency id="System.Reactive" version="4.0.0-preview00001" />
-	  <dependency id="Newtonsoft.Json" version="10.0.3" />
+      <dependency id="System.Reactive" version="4.1.2" />
+	  <dependency id="Newtonsoft.Json" version="11.0.2" />
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\release\*.dll" target="lib\netstandard1.3" />
+    <file src="bin\release\*.dll" target="lib\netstandard2.0" />
   </files>
 </package>

@@ -32,3 +32,9 @@ ReactiveWebsocket\.Portable/project\.lock\.json
 ReactiveWebsocket\.Ios/bin/
 
 ReactiveWebsocket\.Ios/obj/
+
+*.nupkg
+
+Tests/ReactiveWebsocket\.DevTest/bin/
+
+Tests/ReactiveWebsocket\.DevTest/obj/
