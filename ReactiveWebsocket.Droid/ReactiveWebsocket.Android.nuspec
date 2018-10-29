@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>ReactiveWebsocket.Android</id>
-    <version>1.0.0-preview00002</version>
+    <version>1.0.0-preview00006</version>
     <title>Reactive Websocket For Android</title>
     <authors>Harsh Maurya</authors>
     <owners>harshmaurya</owners>
@@ -14,7 +14,7 @@
     <copyright>Copyright 2017</copyright>
     <tags>websocket portable reactive rx android</tags>
     <dependencies>
-      <dependency id="ReactiveWebsocket.Portable" version="1.0.0-preview00004" />
+      <dependency id="ReactiveWebsocket.Portable" version="1.0.0-preview00007" />
     </dependencies>
   </metadata>
   <files>
