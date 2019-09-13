@@ -3,25 +3,25 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading;
 using System.Threading.Tasks;
-using ReactiveWebsocket.Abstractions;
 using ReactiveWebsocket.Model;
 using ReactiveWebsocket.PlatformAbstraction;
 
-namespace ReactiveWebsocket.Public
+namespace ReactiveWebsocket.Implementation
 {
-    public class RawWebsocketClient : IRawWebsocketCommunicator
+    internal class WebsocketCommunicator
     {
-        private readonly WebSocketOptions _options;
         private readonly IPlatformWebsocket _webSocket;
         private readonly Uri _uri;
+        private readonly MessageType _messageType;
         private Subject<byte[]> _dataStream;
         private BehaviorSubject<Status> _statusStream;
 
-        public RawWebsocketClient(IPlatformWebsocket webSocket, Uri uri, WebSocketOptions options)
+        public WebsocketCommunicator(IPlatformWebsocket webSocket,
+            MessageType messageType, Uri uri)
         {
             _webSocket = webSocket;
             _uri = uri;
-            _options = options;
+            _messageType = messageType;
             Initialize();
         }
 
@@ -67,7 +67,7 @@ namespace ReactiveWebsocket.Public
 
         public async Task SendMessageAsync(byte[] message)
         {
-            await _webSocket.SendAsync(new ArraySegment<byte>(message), _options.MessageType, true,
+            await _webSocket.SendAsync(new ArraySegment<byte>(message), _messageType, true,
                 CancellationToken.None);
         }
 

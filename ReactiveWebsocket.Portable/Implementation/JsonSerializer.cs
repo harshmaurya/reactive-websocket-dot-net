@@ -4,7 +4,7 @@ using ReactiveWebsocket.Abstractions;
 
 namespace ReactiveWebsocket.Implementation
 {
-    public class JsonSerializer : IMultiMessageTypeSerializer
+    public class JsonSerializer : ISerializer
     {
         public byte[] Serialize<TRequestType>(TRequestType payload)
         {

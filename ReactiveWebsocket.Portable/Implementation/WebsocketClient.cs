@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
@@ -6,23 +6,27 @@ using System.Threading.Tasks;
 using ReactiveWebsocket.Abstractions;
 using ReactiveWebsocket.Helpers;
 using ReactiveWebsocket.Model;
+using ReactiveWebsocket.PlatformAbstraction;
 
 namespace ReactiveWebsocket.Implementation
 {
-    public class MultiMessageTypeWebsocket : IMultiMessageTypeWebsocket
+    internal class WebsocketClient : IWebSocketClient
     {
-        private readonly IMultiMessageTypeSerializer _serializer;
-        private readonly IMultiMessageTypeDeserializer _deserializer;
-        private readonly IRawWebsocketCommunicator _communicator;
+        private readonly ISerializer _serializer;
+        private readonly IDeserializer _deserializer;
+        private readonly WebsocketCommunicator _communicator;
+        private readonly WebSocketClientSettings _settings;
 
-        public MultiMessageTypeWebsocket(IMultiMessageTypeSerializer serializer, IMultiMessageTypeDeserializer deserializer,
-            IRawWebsocketCommunicator communicator)
+        public WebsocketClient(IConnectionProfile profile,
+            WebSocketClientSettings settings)
         {
-            _serializer = serializer;
-            _deserializer = deserializer;
-            _communicator = communicator;
+            _serializer = profile.Serializer;
+            _deserializer = profile.Deserializer;
+            _communicator = new WebsocketCommunicator(
+                PlatformHelper.Resolve<IPlatformWebsocket>(),
+                profile.MessageType, settings.Uri);
+            _settings = settings;
         }
-
 
         private Status CurrentStatus => StatusStream.FirstAsync().Wait();
 
@@ -60,7 +64,7 @@ namespace ReactiveWebsocket.Implementation
                     .ContinueWith(task =>
                     {
                         if (task.IsFaulted)
-                            throw new Exception(task.Exception.Message); 
+                            throw new Exception(task.Exception.Message);
                     });
                 return _communicator.GetResponseStream().VerifyConnected(CurrentStatus)
                 .Select(bytes => TryDeSerialize<TResponseType>(bytes))
@@ -82,7 +86,7 @@ namespace ReactiveWebsocket.Implementation
         {
             return _communicator.ConnectAsync();
         }
-        
+
 
         public Task CloseAsync()
         {
@@ -108,5 +112,53 @@ namespace ReactiveWebsocket.Implementation
         }
         #endregion
 
+    }
+
+    public class WebsocketClient<TRequestType, TResponseType> : IWebSocketClient<TRequestType, TResponseType>
+    {
+        private readonly WebsocketClient _client;
+
+        public WebsocketClient(IConnectionProfile profile,
+            WebSocketClientSettings settings)
+        {
+            _client = new WebsocketClient(profile, settings);
+        }
+
+        public void Dispose()
+        {
+            _client.Dispose();
+        }
+
+        public IObservable<Status> StatusStream => _client.StatusStream;
+
+        public Task<bool> ConnectAsync()
+        {
+            return _client.ConnectAsync();
+        }
+
+        public Task CloseAsync()
+        {
+            return _client.CloseAsync();
+        }
+
+        public Task<TResponseType> GetResponse(Predicate<TResponseType> filter)
+        {
+            return _client.GetResponse(filter);
+        }
+
+        public Task<TResponseType> GetResponse(TRequestType requestPayload, Predicate<TResponseType> filter)
+        {
+            return _client.GetResponse(requestPayload, filter);
+        }
+
+        public IObservable<TResponseType> GetObservable(TRequestType requestPayload, Predicate<TResponseType> filter)
+        {
+            return _client.GetObservable(requestPayload, filter);
+        }
+
+        public IObservable<TResponseType> GetObservable(Predicate<TResponseType> filter)
+        {
+            return _client.GetObservable<TRequestType, TResponseType>(filter);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using ReactiveWebsocket.Model;
+using ReactiveWebsocket.Portable.Public;
 using ReactiveWebsocket.Public;
 using ReactiveWebsocket.Samples.Model;
 
@@ -11,18 +12,16 @@ namespace ReactiveWebsocket.Samples
 
         public async void RunAsync()
         {
-            //set platform assembly (Optional)
-            WebsocketInitializer.SetPlatform(PlatformName.Desktop);
-
-            var socket = new JsonWebsocketClient(new Uri(Uri));
-
+            var factory = new WebsocketClientFactory(PlatformName.Desktop);
+            var socket = factory.CreateGeneric(new JsonConnectionProfile(), new WebSocketClientSettings(new Uri(Uri)));
+            
             socket.StatusStream.Subscribe(value =>
             {
                 Console.WriteLine(value.ConnectionState != ConnectionState.Disconnected
                     ? $"Status: {value.ConnectionState}; {value.Message}"
                     : $"Status: {value.ConnectionState}; {value.Error?.Message}");
             });
-
+            
             var success = await socket.ConnectAsync();
             if (!success) return;
 

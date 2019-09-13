@@ -6,8 +6,11 @@ namespace ReactiveWebsocket.Samples
     {
         static void Main(string[] args)
         {
-            var stringExample = new JsonPayloadExample();
-            stringExample.RunAsync();
+            //var stringExample = new StringPayloadExample();
+            //stringExample.RunAsync();
+
+            var jsonExample = new JsonPayloadExample();
+            jsonExample.RunAsync();
             Console.Read();
         }
     }

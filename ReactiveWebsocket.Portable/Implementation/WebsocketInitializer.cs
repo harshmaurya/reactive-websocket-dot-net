@@ -2,9 +2,9 @@
 using ReactiveWebsocket.Model;
 using ReactiveWebsocket.PlatformAbstraction;
 
-namespace ReactiveWebsocket.Public
+namespace ReactiveWebsocket.Implementation
 {
-    public static class WebsocketInitializer
+    internal static class WebsocketInitializer
     {
         public static void SetPlatform(PlatformName platform)
         {

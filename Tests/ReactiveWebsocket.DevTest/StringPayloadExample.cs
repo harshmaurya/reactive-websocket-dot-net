@@ -1,5 +1,6 @@
 ﻿using System;
 using ReactiveWebsocket.Model;
+using ReactiveWebsocket.Portable.Public;
 using ReactiveWebsocket.Public;
 using ConnectionState = ReactiveWebsocket.Model.ConnectionState;
 
@@ -11,11 +12,9 @@ namespace ReactiveWebsocket.Samples
         
         public async void RunAsync()
         {
-            //set platform assembly (Optional)
-            WebsocketInitializer.SetPlatform(PlatformName.Desktop);
+            var factory = new WebsocketClientFactory(PlatformName.Desktop);
+            var socket = factory.Create<string, string>(new StringConnectionProfile(), new WebSocketClientSettings(new Uri(Uri)));
 
-            // Use the StringWebsocketClient for simple string payloads
-            var socket = new StringWebsocketClient(new Uri(Uri));
 
             socket.StatusStream.Subscribe(value =>
             {

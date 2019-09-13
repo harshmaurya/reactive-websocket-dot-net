@@ -25,7 +25,10 @@ namespace ReactiveWebsocket.Ios
 
         public Task SendAsync(ArraySegment<byte> buffer, MessageType messageType, bool endOfMessage, CancellationToken cancellationToken)
         {
-            return _underlyingWebsocket.SendAsync(buffer, messageType == MessageType.Binary ? WebSocketMessageType.Binary : WebSocketMessageType.Text, true, CancellationToken.None);
+            var mType = messageType == MessageType.Binary
+                ? WebSocketMessageType.Binary
+                    : WebSocketMessageType.Text;
+            return _underlyingWebsocket.SendAsync(buffer, mType, endOfMessage, CancellationToken.None);
         }
 
         public Task<WebSocketReceiveResult> ReceiveAsync(ArraySegment<byte> buffer, CancellationToken token)

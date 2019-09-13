@@ -1,8 +1,7 @@
 namespace ReactiveWebsocket.Abstractions
 {
-    public interface IMultiMessageTypeSerializer
+    public interface ISerializer
     {
         byte[] Serialize<TRequestType>(TRequestType payload);
     }
-    
 }

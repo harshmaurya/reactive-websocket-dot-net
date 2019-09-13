@@ -1,13 +1,19 @@
 ﻿using System.Text;
 using ReactiveWebsocket.Abstractions;
+using System;
 
 namespace ReactiveWebsocket.Implementation
 {
-    public class StringSerializer : ISingleMessageTypeSerializer<string>
+    public class StringSerializer : ISerializer
     {
-        public byte[] Serialize(string payload)
+        public byte[] Serialize<TRequestType>(TRequestType payload)
         {
-            return Encoding.UTF8.GetBytes(payload);
+            if (payload is string)
+            {
+                return Encoding.UTF8.GetBytes((string)(object)payload);
+            }
+
+            throw new InvalidOperationException("Only string types allowed");
         }
     }
 }

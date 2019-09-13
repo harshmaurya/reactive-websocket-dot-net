@@ -3,7 +3,7 @@ using ReactiveWebsocket.Abstractions;
 
 namespace ReactiveWebsocket.Implementation
 {
-    public class JsonDeserializer : IMultiMessageTypeDeserializer
+    public class JsonDeserializer : IDeserializer
     {
         public bool TryDeserialize<TResultType>(byte[] bytes, out TResultType result)
         {
