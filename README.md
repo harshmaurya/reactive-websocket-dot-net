@@ -26,47 +26,55 @@ The library is available on NuGet. Based on which client you are targeting, you 
 
 **For Desktop client:**
 
-` Install-Package ReactiveWebsocket.Desktop -Version 1.0.0-preview00006`
+` Install-Package ReactiveWebsocket.Desktop -Version 1.0.0`
 
 **For Android client:**
 
-`Install-Package ReactiveWebsocket.Android -Version 1.0.0-preview00006`
+`Install-Package ReactiveWebsocket.Android -Version 1.0.0`
 
 **For Ios client:**
 
-`Install-Package ReactiveWebsocket.Ios -Version 1.0.0-preview00006`
+`Install-Package ReactiveWebsocket.Ios -Version 1.0.0`
 
 Using the above libraries, it is also possible to use them in all types of Xamarin projects. The [sample](https://github.com/harshmaurya/reactive-websocket-samples) programs provided showcase the features of the library.
 
 # Usage:
 
-Other than the brief description here, the complete documentation and code samples can be found [here](https://github.com/harshmaurya/reactive-websocket-samples).
+The API is very easy to use. You just need to decide two things before starting
+1. What type of serialization/deserialization you want to use? Simple string and JSON is available out of the box. You can use your own custom implementation if you want.
+2. What is your messaging strategy? Are you exchanging the same **type** of message every time (using some kind of message wrapper class) or different types of messages?
 
-The API is very easy to use. Firstly, you should decide what is your communication and message type. Whether it is a string, json or your custom implementation. Also, is the message going to be always in a particular format or can it change based on the method call. Let’s say you have a very simple requirement and the server and client communicate using string objects only. You can initialize a StringWebsocketClient which will serve the purpose.
-Initialization is as simple as calling the constructor.
 
-`var socket = new StringWebsocketClient();`
+First you need to create a factory by specifying the current platform which you are running on. 
 
-After you have selected the right client, you need to connect to the server which supports WebSockets.
+`var factory = new WebsocketClientFactory(PlatformName.Desktop);`
 
-`var success = await socket.ConnectAsync(new Uri(Uri), CancellationToken.None);`
+Then get hold of the websocket object by specifying the parameters. There are two overloads in the factory method depending on what kind of messaging strategy you have decided to use as discussed in point 2 above.
+In the below example we have used JSON profile and generic overload which means you are free to use any **type** of message for communication.
+`var socket = factory.CreateGeneric(new JsonConnectionProfile(), new WebSocketClientSettings(new Uri(Uri)));`
 
-Then, based on type of API call you can call two types of methods. If it is request response type where you only expect the result to be sent once, then use the following.
+Then you simply need to connect to the server.
 
-var result = await socket.GetResponse(request, filter => true);
+`var success = await socket.ConnectAsync();`
 
-Note that the second parameter specifies a predicate to filter out the responses. Here we would get all the responses from the server even if it is a result of some previous method call. You should ideally have a mechanism in your application code to identify and correlate the results. For example setting an Id field in the request and using the same Id to populate the result object on server side.If you expect a stream of response from the server, you can use the following:
+For starting the message exchange, you can call two types of methods. If it is request response type where you only expect the result to be sent once, then use the following.
+
+`var result = await socket.GetResponse<Data, Result>(inputData, result1 => result1.Id.Equals(inputData.Id));`
+
+Note that the second parameter specifies a predicate to filter out the responses if the server is sending multiple messages over the same call. This depends on how the server is implemented and the filter may not always be needed.
+
+If you expect a stream of response from the server, you can use the following:
 
 ```
-socket.GetObservable(request, filter => true)
-.Subscribe(value =>
-{
-Console.WriteLine($"Message received from server {value}");
-},
-exception =>
-{
-Console.WriteLine($"Error: {exception.Message}");
-});
+socket.GetObservable<Data, Result>(inputData, result1 => result1.Id.Equals(inputData.Id))
+                .Subscribe(resultReceived =>
+                    {
+                        Console.WriteLine($"Result received from server {resultReceived.Value}");
+                    },
+                    exception =>
+                    {
+                        Console.WriteLine($"Error: {exception.Message}");
+                    });
 ```
 
 To subscribe to the connection status and error :
