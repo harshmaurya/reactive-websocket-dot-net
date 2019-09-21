@@ -51,6 +51,7 @@ First you need to create a factory by specifying the current platform which you 
 
 Then get hold of the websocket object by specifying the parameters. There are two overloads in the factory method depending on what kind of messaging strategy you have decided to use as discussed in point 2 above.
 In the below example we have used JSON profile and generic overload which means you are free to use any **type** of message for communication.
+
 `var socket = factory.CreateGeneric(new JsonConnectionProfile(), new WebSocketClientSettings(new Uri(Uri)));`
 
 Then you simply need to connect to the server.
